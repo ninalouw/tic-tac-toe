@@ -4,7 +4,7 @@
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+  height: 40px;
 }
 
 .App-header {
@@ -35,15 +35,22 @@
 }
 
 .square {
-  background: #fff;
-  border: 1px solid #00BCD4;
-  font-size: 90px;
-  height: 100px;
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
-  text-align: center;
-  width: 100px;
+background: #fff;
+border: 1px solid #00BCD4;
+float: left;
+font-size: 64px;
+font-weight: bold;
+line-height: 34px;
+height: 104px;
+margin-right: -1px;
+margin-top: -1px;
+padding: 0;
+text-align: center;
+width: 104px;
+}
+
+.square:focus {
+  outline: none;
 }
 
 .status {
