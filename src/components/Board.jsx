@@ -17,24 +17,37 @@ class Board extends React.Component {
   };
   handleClick(i){
     const squares = this.state.squares.slice();
+    if (this.calculateWinner(squares) || squares[i]) {
+      return;
+    }
     squares[i] = this.state.nextPlayerIsX ? 'X' : 'O';
     this.setState({
       squares: squares,
       nextPlayerIsX: !this.state.nextPlayerIsX,
     });
   }
-  calculateWinner(squares){
-    var hasWon = false;
-    //want to check first 3 indices
-    console.log(squares);
-    for(var i = 0; i < squares.length; i++){
-        console.log(i);
-        if ((squares[i] === squares[i + 1]) && (squares[i+1] === squares[i + 2]) ||
-        (squares[i] === squares[i + 3]) && (squares[i + 3] === squares[i + 6])){
-          return hasWon = true;
-        }
-        hasWon;
+  calculateWinner(squaresArray){
+    /*hardcode all possible winning combinations*/
+    const possibleCombinations = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+    /*loop over winning combinations,
+    check if any triple combinations are equal,
+    i.e if any 'x','x','x' or 'o','o','o' combinations */
+    for (let i = 0; i < possibleCombinations.length; i++) {
+      const [a, b, c] = possibleCombinations[i];
+      if (squaresArray[a] && squaresArray[a] === squaresArray[b] && squaresArray[a] === squaresArray[c]) {
+        return squaresArray[a];
+      }
     }
+    return null;
   }
 
   render(){
@@ -42,7 +55,7 @@ class Board extends React.Component {
     const winner = this.calculateWinner(this.state.squares);
     let status;
     if (winner) {
-        status = `Winner:${winner}`;
+        status = `Winner is: ${winner}`;
     } else {
         status = `Next player: ${nextPlayer}`;
     }
